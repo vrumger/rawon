@@ -23,7 +23,7 @@ export class ClientUtils {
     }
 
     public requiredVoters(memberAmount: number): number {
-        return Math.round(memberAmount / 2);
+        return Math.round((memberAmount - 1) / 2);
     }
 
     public decode(string: string): string {
