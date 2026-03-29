@@ -99,7 +99,9 @@ export class VoiceStateUpdateListener extends Listener<typeof Events.VoiceStateU
 
         const member = newState.member;
         const oldMember = oldState.member;
-        const queueVcMembers = queueVc.members.filter((mbr) => !mbr.user.bot);
+        const queueVcMembers = queueVc.members.filter(
+            (mbr) => !mbr.user.bot && mbr.voice.deaf !== true,
+        );
 
         if (oldMember?.id === botId && oldId === queueVc.id && newId === undefined) {
             const isIdle = queue.idle;
@@ -138,7 +140,28 @@ export class VoiceStateUpdateListener extends Listener<typeof Events.VoiceStateU
             }
         }
 
-        if (newState.mute !== oldState.mute || newState.deaf !== oldState.deaf) {
+        const isMuteChanged = newState.mute !== oldState.mute;
+        const isDeafChanged = newState.deaf !== oldState.deaf;
+        const isRelevantDeafToggle =
+            isDeafChanged &&
+            oldId === queueVc.id &&
+            newId === queueVc.id &&
+            member?.user.bot !== true;
+
+        if (isMuteChanged || isDeafChanged) {
+            if (isRelevantDeafToggle) {
+                queue.skipVoters = queue.skipVoters.filter((x) => x !== member?.id);
+                if (queueVcMembers.size <= 0 && queue.timeout === null && !queue.idle) {
+                    this.timeout(queueVcMembers, queue, newState, thisBotGuild);
+                    return;
+                }
+
+                if (queueVcMembers.size > 0 && queue.timeout) {
+                    this.resume(queueVcMembers, queue, newState, thisBotGuild);
+                    return;
+                }
+            }
+
             return;
         }
 
@@ -146,7 +169,9 @@ export class VoiceStateUpdateListener extends Listener<typeof Events.VoiceStateU
             member?.id === botId && oldId !== undefined && oldId !== newId && newId !== undefined;
 
         if (isBotMoved) {
-            const newChannelMembers = newVc?.members.filter((mbr) => !mbr.user.bot);
+            const newChannelMembers = newVc?.members.filter(
+                (mbr) => !mbr.user.bot && mbr.voice.deaf !== true,
+            );
             const newChannelMemberCount = newChannelMembers?.size ?? 0;
 
             this.container.logger.debug(
