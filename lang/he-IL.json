@@ -1,0 +1,457 @@
+{
+    "commands": {
+        "developers": {
+            "eval": {
+                "description": "הרץ קוד JavaScript",
+                "errorString": "שגיאה",
+                "noCode": "לא סופק קוד.",
+                "inputString": "קלט",
+                "outputString": "פלט",
+                "usage": "{prefix}eval <some code>"
+            },
+            "login": {
+                "description": "ניהול סשן התחברות לגוגל עבור אימות קוקיז של YouTube",
+                "usage": "{prefix}login <start | status | logout>",
+                "slashStartDescription": "התחל סשן התחברות לגוגל דרך הדפדפן",
+                "slashStatusDescription": "בדוק את סטטוס סשן ההתחברות הנוכחי",
+                "slashLogoutDescription": "סגור את סשן הדפדפן",
+                "invalidSubcommand": "שימוש: {loginUsage}",
+                "alreadyLoggedIn": "כבר מחובר. השתמש ב-{logoutCmd} קודם כדי להתחיל סשן חדש.",
+                "launching": "מפעיל דפדפן להתחברות לגוגל...",
+                "sessionTitle": "סשן התחברות לגוגל",
+                "sessionDescription": "חלון דפדפן נפתח. התחבר שם עם חשבון הגוגל שלך.",
+                "step1WithUrl": "1. אתר את חלון הדפדפן שזה עתה הופיע בשרת",
+                "step1Fallback": "1. אתר את חלון הדפדפן שזה עתה הופיע בשרת",
+                "step2WithUrl": "2. התחבר עם חשבון הגוגל שלך",
+                "step2Fallback": "2. אם זה מרחוק, פתח DevTools דרך `chrome://inspect` והוסף את {target}",
+                "step3": "3. הבוט יזהה אוטומטית כשההתחברות תושלם",
+                "step4": "4. כתובת DevTools מרחוק: {url} (אופציונלי)",
+                "timeLimit": "יש לך {minutes} דקות להשלים את ההתחברות.",
+                "loginSuccess": "התחברות הצליחה",
+                "loginSuccessDescription": "התחברת בהצלחה{email}.\n\nהקוקיז יוצאו ונשמרו.\nYouTube אמור לעבוד עכשיו בלי בעיות זיהוי בוט.",
+                "loginSuccessEmail": " כ-{email}",
+                "loginFailed": "ההתחברות נכשלה",
+                "loginFailedDescription": "זמן ההתחברות פג או שהפעולה בוטלה.\n\nהשתמש ב-{cmd} כדי לנסות שוב.",
+                "loginError": "שגיאת התחברות",
+                "loginErrorDescription": "אירעה שגיאה במהלך ההתחברות:\n{error}",
+                "statusTitle": "סטטוס התחברות וקוקיז",
+                "logoutSuccess": "סשן ההתחברות נוקה.\n\nכל הקוקיז ונתוני הפרופיל נמחקו.\nהשתמש ב-{cmd} כדי להתחיל סשן חדש.",
+                "logoutNoBrowser": "אין סשן התחברות פעיל.",
+                "cookieFileField": "קובץ קוקיז",
+                "statusActive": "פעיל",
+                "statusMissing": "אין קוקיז זמינים",
+                "sizeLabel": "גודל",
+                "lastRefreshLabel": "רענון אחרון",
+                "lastRefreshNever": "אף פעם",
+                "googleLoginField": "התחברות גוגל",
+                "sessionLoggedIn": "מחובר",
+                "sessionWaiting": "ממתין להתחברות...",
+                "sessionError": "שגיאה: {error}",
+                "sessionIdle": "לא התחיל",
+                "accountLabel": "חשבון",
+                "accountNA": "`N/A`",
+                "gettingStartedField": "התחלה מהירה",
+                "gettingStartedText": "השתמש ב-{loginCmd} כדי להתחבר לגוגל וליצור קוקיז באופן אוטומטי.",
+                "statsTitle": "סטטיסטיקה"
+            },
+            "setup": {
+                "description": "הגדרת תצורת הבוט (למפתחים בלבד)",
+                "usage": "{prefix}setup <setting> [value]",
+                "unknownSetting": "הגדרה לא מוכרת. השתמש ב-{command} כדי לראות את ההגדרות הזמינות.",
+                "embedTitle": "הגדרות בוט",
+                "embedColor": {
+                    "set": "צבע ההטמעה הוגדר ל-{color}",
+                    "reset": "צבע ההטמעה אופס לברירת המחדל.",
+                    "invalid": "צבע Hex לא תקין. השתמש בקוד Hex בן 6 תווים (למשל `#FF5733` או `FF5733`)."
+                },
+                "yesEmoji": {
+                    "set": "אמוג'י ההצלחה הוגדר ל-{emoji}",
+                    "reset": "אמוג'י ההצלחה אופס לברירת המחדל."
+                },
+                "noEmoji": {
+                    "set": "אמוג'י השגיאה הוגדר ל-{emoji}",
+                    "reset": "אמוג'י השגיאה אופס לברירת המחדל."
+                },
+                "altPrefix": {
+                    "set": "קידומות חלופיות הוגדרו ל: {prefixes}",
+                    "reset": "הקידומות החלופיות אופסו לברירת המחדל.",
+                    "invalid": "נא לספק לפחות קידומת אחת."
+                },
+                "splash": {
+                    "set": "תמונת הפתיחה של ערוץ הבקשות הוגדרה.",
+                    "reset": "תמונת הפתיחה של ערוץ הבקשות אופסה לברירת המחדל.",
+                    "invalid": "נא לספק כתובת URL תקינה."
+                },
+                "defaultVolume": {
+                    "set": "עוצמת ברירת המחדל הוגדרה ל-{volume}",
+                    "reset": "עוצמת ברירת המחדל אופסה.",
+                    "invalid": "העוצמה חייבת להיות מספר בין `1` ל-`200`"
+                },
+                "selectionType": {
+                    "set": "סוג בחירת המוזיקה הוגדר ל-{type}",
+                    "reset": "סוג בחירת המוזיקה אופס לברירת המחדל.",
+                    "invalid": "סוג הבחירה חייב להיות `message` או `selectmenu`"
+                },
+                "audioCache": {
+                    "set": "מטמון האודיו {state}",
+                    "enabled": "הופעל",
+                    "disabled": "כובה"
+                },
+                "resetAll": "כל הגדרות הבוט אופסו לברירות המחדל."
+            }
+        },
+        "general": {
+            "about": {
+                "aboutFooter": "{botname} - מידע על הבוט",
+                "botUptimeString": "זמן פעילות הבוט",
+                "botVersionString": "גרסת הבוט",
+                "cachedUsersString": "משתמשים במטמון",
+                "channelsString": "ערוצים",
+                "commitString": "קומיט",
+                "description": "הצג מידע על הבוט",
+                "discordJSVersionString": "גרסת Discord.js",
+                "ffmpegVersionString": "גרסת FFmpeg",
+                "nodeVersionString": "גרסת Node.js",
+                "osUptimeString": "זמן פעילות המערכת",
+                "processUptimeString": "זמן פעילות התהליך",
+                "serversString": "שרתים",
+                "sourceCodeString": "קוד מקור"
+            },
+            "help": {
+                "aliasesString": "כינויים",
+                "authorString": "{username} - רשימת פקודות",
+                "commandDetailTitle": "{username} - מידע על הפקודה {command}",
+                "commandSelectionString": "אנא בחר פקודה",
+                "commandUsageFooter": "<> = חובה | [] = אופציונלי {devOnly}",
+                "description": "הצג את רשימת הפקודות או מידע על פקודה מסוימת",
+                "descriptionString": "תיאור",
+                "disabledSelection": "אין מה לבחור כאן",
+                "footerString": "{prefix}help <command> כדי לקבל מידע נוסף על פקודה מסוימת",
+                "nameString": "שם",
+                "noAliases": "אין.",
+                "noCommandSuggest": "לא נמצאה פקודה תואמת. התכוונת לזו?",
+                "noCommand": "לא נמצאה פקודה תואמת.",
+                "slashDescription": "שם פקודה להצגת מידע ספציפי על הפקודה",
+                "usage": "{prefix}help [command]",
+                "usageString": "שימוש"
+            },
+            "invite": {
+                "clickURL": "- **[לחץ כאן]({url})** כדי להזמין את הבוט{botNum} לשרת שלך.",
+                "description": "קבל את קישור ההזמנה של הבוט",
+                "inviteTitle": "{bot} - קישור הזמנה"
+            },
+            "ping": {
+                "description": "הצג את הפינג הנוכחי של הבוט",
+                "footerString": "זמן תגובה של: {user}"
+            },
+            "language": {
+                "description": "שנה את שפת הבוט לשרת הזה",
+                "noPermission": "נדרשת הרשאת **Manage Server** כדי להשתמש בפקודה הזאת.",
+                "slashSetDescription": "הגדר את שפת השרת",
+                "slashViewDescription": "הצג את שפת השרת הנוכחית",
+                "slashResetDescription": "אפס לשפת ברירת המחדל",
+                "slashLocaleOption": "השפה להגדרה",
+                "usage": "{prefix}language <view | set | reset> [locale]",
+                "embedTitle": "הגדרות שפה",
+                "currentLanguage": "השפה הנוכחית:",
+                "languageSet": "שפת השרת הוגדרה ל-",
+                "languageReset": "שפת השרת אופסה לברירת המחדל:",
+                "invalidLocale": "שפה לא תקינה. שפות זמינות:",
+                "availableLocales": "שפות זמינות"
+            },
+            "prefix": {
+                "currentPrefix": "הקידומת הנוכחית: {prefix}",
+                "description": "שנה את קידומת הפקודות עבור השרת הזה",
+                "embedTitle": "הגדרות קידומת",
+                "noPermission": "נדרשת הרשאת **Manage Server** כדי להשתמש בפקודה הזאת.",
+                "prefixReset": "הקידומת אופסה ל: {prefix}",
+                "prefixSet": "הקידומת הוגדרה ל: {prefix}",
+                "prefixTooLong": "הקידומת לא יכולה להיות ארוכה מ-`10` תווים.",
+                "slashPrefixOption": "הקידומת החדשה (מקסימום `10` תווים)",
+                "slashResetDescription": "אפס לקידומת ברירת מחדל",
+                "slashSetDescription": "הגדר קידומת מותאמת אישית לשרת הזה",
+                "slashViewDescription": "הצג את הקידומת הנוכחית",
+                "usage": "{prefix}prefix [new prefix | view | reset]"
+            }
+        },
+        "music": {
+            "dj": {
+                "description": "שנה את הגדרות תכונת ה-DJ",
+                "usage": "{prefix}dj <enable | disable | role> [role]",
+                "disable": "מכובה",
+                "disableText": "תכונת ה-DJ **`כובתה`**",
+                "embedTitle": "תכונת DJ",
+                "enable": "מופעל",
+                "enableText": "תכונת ה-DJ **`הופעלה`**",
+                "newRoleText": "תפקיד חדש",
+                "noPermission": "נדרשת הרשאת **Manage Server** כדי להשתמש בפקודה הזאת.",
+                "role": {
+                    "current": "תפקיד ה-DJ הנוכחי: <@&{role}>",
+                    "invalid": "תפקיד לא תקין.",
+                    "noRole": "לא הוגדר תפקיד DJ, אנא הגדר עם `{prefix}dj role`",
+                    "success": "תפקיד ה-DJ הוגדר ל-<@&{role}>"
+                },
+                "slashDisableDescription": "כבה את תכונת ה-DJ",
+                "slashEnableDescription": "הפעל את תכונת ה-DJ",
+                "slashRoleDescription": "הצג או שנה את תפקיד ה-DJ",
+                "slashRoleNewRoleOption": "תפקיד חדש ל-DJ"
+            },
+            "filter": {
+                "availableFilters": "פילטרים זמינים",
+                "currentlyUsedFilters": "פילטרים בשימוש כרגע",
+                "currentState": "הפילטר {filter} כרגע {state}",
+                "description": "הגדר פילטר לשיר",
+                "usage": "{prefix}filter <enable | disable | status> [filter]",
+                "embedFooter": "כדי {opstate} את הפילטר, השתמש ב-{prefix}filter {opstate} {filter}",
+                "filterSet": "הפילטר {filter} עכשיו {state}",
+                "filterRestartedFooter": "השיר הופעל מחדש מההתחלה (האודיו עדיין נטען).",
+                "filterNoQueueFooter": "הפילטר יחול כשתתחיל לנגן מוזיקה.",
+                "slashStateDescription": "{state, select, enable {הפעל} other {כבה}} פילטר לשיר",
+                "slashStateFilterDescription": "פילטר השיר שיהיה {state, select, enable {מופעל} other {מכובה}}",
+                "slashStatusDescription": "בדוק את המצב הנוכחי של פילטרים לשירים",
+                "slashStatusFilterDescription": "פילטר השיר שברצונך לבדוק",
+                "specifyFilter": "אנא ציין פילטר לשיר."
+            },
+            "lyrics": {
+                "description": "הצג את מילות השיר",
+                "noLyrics": "לא נמצאו מילים עבור {song}",
+                "noQuery": "שום דבר לא מתנגן, או שלא סופקו ארגומנטים.",
+                "searchingLyrics": "מחפש מילים...",
+                "slashDescription": "שיר לחיפוש",
+                "usage": "{prefix}lyrics [song]"
+            },
+            "nowplaying": {
+                "description": "הצג את מצב נגן המדיה",
+                "disableButton": "הכפתורים הקודמים כבר לא פעילים והוסרו.",
+                "pauseResumeButton": "השהה/המשך",
+                "skipButton": "דלג",
+                "stopButton": "עצור נגן",
+                "showQueueButton": "הצג תור",
+                "emptyQueue": "התור ריק.",
+                "error": "שגיאה בקבלת מתנגן כעת: {message}",
+                "live": "LIVE",
+                "requestedBy": "התבקש על ידי",
+                "unknownDuration": "משך לא ידוע"
+            },
+            "pause": {
+                "alreadyPause": "נגן המוזיקה כבר מושהה.",
+                "description": "השהה את נגן המוזיקה",
+                "pauseMessage": "נגן המוזיקה הושהה."
+            },
+            "play": {
+                "alreadyPlaying": "נגן המוזיקה כבר מנגן בערוץ הקולי {voiceChannel}.",
+                "description": "נגן מוזיקה",
+                "noSongData": "לכתובת הזאת אין נתוני שיר.",
+                "slashQueryDescription": "שאילתה לחיפוש",
+                "usage": "{prefix}play <query | url>"
+            },
+            "queue": {
+                "description": "הצג את רשימת התור"
+            },
+            "remove": {
+                "description": "הסר שיר(ים) מהתור",
+                "noPermission": "אין לך הרשאה להשתמש בפקודה הזאת.",
+                "noPositions": "אנא ציין את מיקומי השירים להסרה.",
+                "slashPositionsDescription": "מיקומי השירים להסרה, מופרדים בפסיק או רווח",
+                "songSkip": "השיר הנוכחי הוסר, השיר דולג.\n\n",
+                "songsRemoved": "הוסרו {removed, plural, one {שיר 1} other {# שירים}} מהתור.",
+                "usage": "{prefix}remove <positions>"
+            },
+            "repeat": {
+                "actualMode": "מצב החזרה הנוכחי הוא {mode}",
+                "description": "חזור על השיר הנוכחי או על התור",
+                "footer": "כדי לשנות מצב, ראה {prefix}help repeat",
+                "newMode": "מצב החזרה הוגדר ל-{mode}",
+                "slashDisable": "כבה מצב חזרה",
+                "slashQueue": "הגדר מצב חזרה ל-**`Queue`**",
+                "slashSong": "הגדר מצב חזרה ל-**`Song`**",
+                "usage": "{prefix}repeat <{options}>"
+            },
+            "resume": {
+                "alreadyResume": "נגן המוזיקה לא מושהה.",
+                "description": "המשך את נגן המוזיקה",
+                "resumeMessage": "נגן המוזיקה חודש."
+            },
+            "search": {
+                "cancelMessage": "הקלד {cancel} או c כדי לבטל בחירת מוזיקה.",
+                "canceledMessage": "בחירת המוזיקה בוטלה.",
+                "description": "נגן מוזיקה באמצעות השאילתה שסופקה",
+                "disabledSelection": "אין מה לבחור כאן",
+                "interactionContent": "אנא בחר מוזיקה",
+                "interactionPlaceholder": "אנא בחר מוזיקה",
+                "noQuery": "אנא ספק שאילתה לחיפוש.",
+                "noSelection": "לא הוזן ערך או שהערך לא תקין, בחירת המוזיקה בוטלה.",
+                "noTracks": "לא הצלחתי למצוא תוצאות חיפוש.",
+                "queueEmbed": "אנא בחר מוזיקה; ניתן לבחור יותר מאחד באמצעות רווח או {separator}.\n",
+                "slashQueryDescription": "שאילתה לחיפוש",
+                "slashSourceDescription": "המקור שממנו לחפש",
+                "trackSelectionMessage": "בחירת מוזיקה",
+                "usage": "{prefix}search <query> [source]"
+            },
+            "shuffle": {
+                "actualState": "מצב הערבוב הנוכחי הוא {state}",
+                "description": "הגדר מצב לתכונת הערבוב",
+                "newState": "מצב הערבוב הוגדר ל-{state}"
+            },
+            "autoplay": {
+                "actualState": "ניגון אוטומטי כרגע {state}",
+                "description": "הפעל/כבה מצב ניגון אוטומטי",
+                "newState": "ניגון אוטומטי עכשיו {state}"
+            },
+            "seek": {
+                "cantSeekLive": "אי אפשר לבצע Seek בשידורים חיים.",
+                "cantSeekSoundcloud": "אי אפשר לבצע Seek ברצועות SoundCloud.",
+                "description": "בצע Seek לזמן מסוים בשיר הנוכחי",
+                "exceedsDuration": "זמן ה-Seek חורג ממשך השיר ({duration}).",
+                "invalidTime": "פורמט זמן לא תקין: {time}. השתמש בפורמטים כמו `1:30` או `90`",
+                "noPlaying": "אין שיר שמתנגן כרגע.",
+                "noTime": "אנא ציין זמן לביצוע Seek.",
+                "notCached": "עדיין אי אפשר לבצע Seek בשיר הזה. אנא המתן לטעינת האודיו.",
+                "seeked": "בוצע Seek ל-{time}",
+                "slashTimeDescription": "זמן לביצוע Seek (למשל `1:30` או `90`)",
+                "usage": "{prefix}seek <time>",
+                "waitingForCache": "אנא המתן, האודיו עדיין נטען..."
+            },
+            "skip": {
+                "description": "דלג על המוזיקה",
+                "skipMessage": "דולג {song}",
+                "voteResultMessage": "{length}/{required} הצביעו לדלג על השיר הנוכחי."
+            },
+            "skipTo": {
+                "cantPlay": "אי אפשר לדלג לשיר הנוכחי.",
+                "description": "דלג למיקום מסוים בתור",
+                "invalidPosition": "אנא ספק מספר מיקום תקין.",
+                "noPermission": "אין לך הרשאה להשתמש בפקודה הזאת.",
+                "noSongPosition": "לא ניתן למצוא שיר במיקום הזה.",
+                "skipMessage": "דולג ל-{song}",
+                "slashFirstDescription": "חזור לשיר הראשון בתור",
+                "slashLastDescription": "דלג לשיר האחרון בתור",
+                "slashPositionDescription": "מיקום השיר בתור",
+                "slashSpecificDescription": "דלג למיקום מסוים בתור",
+                "usage": "{prefix}skipto <{options} | number>"
+            },
+            "stop": {
+                "description": "עצור את נגן המוזיקה",
+                "stoppedMessage": "נגן המוזיקה נעצר."
+            },
+            "volume": {
+                "changeVolume": "כדי לשנות עוצמה, ספק את מספר העוצמה בשימוש בפקודה הזאת.",
+                "currentVolume": "העוצמה הנוכחית היא {volume}",
+                "description": "שנה את עוצמת נגן המדיה",
+                "newVolume": "העוצמה הוגדרה ל-{volume}",
+                "noPermission": "נדרש תפקיד DJ או הרשאת **Manage Server** כדי להגדיר עוצמה מעל `100%`",
+                "plsPause": "אנא השהה את המוזיקה במקום להגדיר את העוצמה ל-{volume}",
+                "slashDescription": "עוצמה חדשה",
+                "usage": "{prefix}volume [new volume]"
+            },
+            "requestChannel": {
+                "description": "הגדר ערוץ בקשות למוזיקה",
+                "noPermission": "נדרשת הרשאת **Manage Server** כדי להשתמש בפקודה הזאת.",
+                "invalidChannel": "אנא ספק ערוץ טקסט תקין.",
+                "noBotPermissions": "לא הצלחתי לבדוק את ההרשאות שלי לערוץ הזה.",
+                "missingBotPermissions": "חסרות לי ההרשאות הבאות בערוץ הזה: {permissions}",
+                "failedToSetup": "הגדרת ערוץ הבקשות נכשלה. אנא בדוק את ההרשאות שלי.",
+                "alreadyHasChannel": "לשרת הזה כבר מוגדר ערוץ בקשות כ-{channel}. אנא הסר אותו קודם לפני הגדרת ערוץ חדש.",
+                "channelAlreadyInUse": "הערוץ הזה כבר בשימוש כערוץ בקשות.",
+                "noChannelToRemove": "לא מוגדר ערוץ בקשות להסרה.",
+                "slashSetDescription": "הגדר ערוץ כערוץ בקשות",
+                "slashRemoveDescription": "הסר את ערוץ הבקשות",
+                "slashStatusDescription": "הצג את ערוץ הבקשות הנוכחי",
+                "slashChannelDescription": "הערוץ להגדרה כערוץ בקשות",
+                "usage": "{prefix}requestchannel <set | remove | status> [channel]"
+            }
+        }
+    },
+    "events": {
+        "channelUpdate": {
+            "connectionReconfigured": "החיבור הוגדר מחדש בהצלחה.",
+            "reconfigureConnection": "אזור ערוץ הקול השתנה, מגדיר מחדש את החיבור...",
+            "unableReconfigureConnection": "לא ניתן היה להגדיר מחדש את החיבור, התור נמחק."
+        },
+        "createInteraction": {
+            "message1": "מצטערים, אבל האינטראקציה הזאת מיועדת רק ל-<@{user}> ולצוות השרת.",
+            "devOnly": "פקודה למפתחים בלבד.",
+            "lyricsCommandNotFound": "פקודת מילים לא נמצאה.",
+            "wrongBot": "יש לבצע את הפקודה הזאת ב-{botMention} כבוט הראשי של השרת הזה.",
+            "primaryBotFallback": "הבוט הראשי"
+        },
+        "createMessage": "היי {author}, הקידומת שלי היא {prefix}",
+        "cmdLoading": "טוען...",
+        "voiceStateUpdate": {
+            "connectionReconfigured": "החיבור הוגדר מחדש בהצלחה.",
+            "deleteQueue": "עברו {duration} ואף אחד לא הצטרף לערוץ הקול, התור נמחק.",
+            "deleteQueueFooter": "התור נמחק",
+            "disconnectFromVCMessage": "התנתקת מערוץ הקול, התור נמחק.",
+            "joinStageMessage": "הצטרפת בהצלחה לערוץ הבמה כדובר.",
+            "joiningAsSpeaker": "הועברת לערוץ הבמה, מנסה להצטרף כדובר...",
+            "pauseQueue": "כולם יצאו מערוץ הקול. כדי לחסוך משאבים, התור הושהה.\nאם אף אחד לא יצטרף לערוץ הקול במהלך {duration} הקרובות, התור יימחק.",
+            "pauseQueueFooter": "התור הושהה",
+            "reconfigureConnection": "הועברת לערוץ קול באזור אחר, מגדיר מחדש את החיבור...",
+            "resumeQueue": "מישהו הצטרף לערוץ הקול.\nממשיך את {song}",
+            "resumeQueueFooter": "התור חודש",
+            "unableJoinStageMessage": "לא ניתן להצטרף כדובר, התור נמחק.",
+            "unableReconfigureConnection": "לא ניתן היה להגדיר מחדש את החיבור, התור נמחק."
+        }
+    },
+    "requestChannel": {
+        "title": "נגן מוזיקה",
+        "standby": "לא מתנגנת מוזיקה. שלח שם שיר או URL כדי להתחיל לנגן!",
+        "status": "מצב לולאה",
+        "shuffle": "ערבוב",
+        "autoplay": "ניגון אוטומטי",
+        "volume": "עוצמה",
+        "queueFooter": "רצועות שנותרו בתור: {count} (משך {duration}, ניגון אוטומטי: {state})",
+        "live": "LIVE",
+        "songDuration": "משך",
+        "requestedBy": "התבקש על ידי",
+        "unknown": "לא ידוע",
+        "notInVoice": "עליך להיות בערוץ קולי כדי לבקש מוזיקה.",
+        "noResults": "לא נמצאו תוצאות עבור השאילתה שלך.",
+        "addedToQueue": "{song} נוסף לתור.",
+        "addedPlaylistToQueue": "נוספו {count} שירים מ-{playlist} לתור.",
+        "queueListTitle": "רשימת תור",
+        "emptyQueue": "התור ריק.",
+        "nothingPlaying": "כרגע לא מתנגן כלום.",
+        "setChannel": "ערוץ הבקשות הוגדר ל-{channel}",
+        "removeChannel": "ערוץ הבקשות הוסר.",
+        "noChannel": "כרגע לא מוגדר ערוץ בקשות.",
+        "currentChannel": "ערוץ הבקשות הנוכחי: {channel}",
+        "skipInProgress": "אנא המתן, פעולת דילוג כבר מתבצעת.",
+        "noPermission": "אין לך הרשאה לבצע את הפעולה הזאת. רק תפקיד DJ, מנהלי שרת או מבקש השיר יכולים לעשות זאת."
+    },
+    "reusable": {
+        "invalidUsage": "שימוש לא תקין. אנא השתמש ב-{prefix} {name} למידע נוסף.",
+        "pageFooter": "עמוד {actual} מתוך {total}",
+        "lyricsSource": "מקור: {source}",
+        "enabled": "מופעל",
+        "disabled": "מכובה"
+    },
+    "utils": {
+        "commonUtil": {
+            "botMissingChannelPerms": "חסרות לי ההרשאות הבאות ב-{channel}: {permissions}"
+        },
+        "cooldownMessage": "{author}, אנא המתן {timeleft} עקב זמן המתנה.",
+        "generalHandler": {
+            "errorJoining": "שגיאה בעת הצטרפות לערוץ הקול בגלל: {message}",
+            "errorPlaying": "אירעה שגיאה בעת ניסיון לנגן מוזיקה בגלל: {message}",
+            "handleVideoInitial": "נוספו {length} שירים לתור.",
+            "leftVC": "עזבתי את ערוץ הקול כי הייתי לא פעיל יותר מדי זמן.",
+            "queueEnded": "התור הסתיים. השתמש ב-{usage} כדי לנגן עוד מוזיקה.",
+            "startPlaying": "התחיל לנגן {song}",
+            "stopPlaying": "הפסיק לנגן {song}",
+            "songRequeued": "הייתה בעיה בניגון {song}; השיר הוחזר לתור לניסיון נוסף.",
+            "allCookiesFailed": "כל הקוקיז נכשלו עקב זיהוי בוט! השתמש ב-`{prefix}login logout` ואז ב-`{prefix}login start` כדי להתחבר מחדש.",
+            "ageRestricted": "לא ניתן לנגן את {song} כי הוא מוגבל גיל ודורש התחברות."
+        },
+        "musicDecorator": {
+            "noInVC": "מצטערים, אבל עליך להיות בערוץ קולי כדי לעשות זאת.",
+            "noQueue": "שום דבר לא מתנגן.",
+            "notPlaying": "אין מוזיקה שמתנגנת כרגע. אנא נגן שיר קודם.",
+            "sameVC": "עליך להיות באותו ערוץ קול כמוני.",
+            "useRequestChannel": "אנא השתמש בערוץ הבקשות {channel} לפקודות מוזיקה.",
+            "useRequestChannelDirect": "הפקודה הזאת מושבתת בערוץ הבקשות. אנא השתמש בכפתורי הנגן או הקלד את שם/קישור השיר ישירות.",
+            "validVCJoinable": "מצטערים, אבל אני לא יכול **`Connect`** לערוץ הקול שלך. ודא שיש לי את ההרשאות המתאימות.",
+            "validVCPermission": "מצטערים, אבל אני לא יכול **`Speak`** בערוץ הקול הזה; ודא שיש לי את ההרשאות המתאימות."
+        }
+    }
+}

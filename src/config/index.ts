@@ -83,6 +83,7 @@ i18n.configure({
         "tr-TR",
         "ko-KR",
         "ms-MY",
+        "he-IL",
     ],
     objectNotation: true,
     updateFiles: false,
